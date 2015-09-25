@@ -1,4 +1,4 @@
-package tests;
+package ca.mcgill.ecse429.conformancetest.tests;
 
 import java.util.List;
 
