@@ -19,6 +19,9 @@ public class ConformanceTest {
 		
 		System.out.println(mach.toString());
 		List<Transition> trans = mach.getTransitions();
+		
+		Tree tree = new Tree(mach);
+		/*
 		for (int i = 0; i < trans.size(); i++) {
 			System.out.println("Action: " + trans.get(i).getAction()); 
 			System.out.println("Condition: " + trans.get(i).getCondition()); 
@@ -27,6 +30,6 @@ public class ConformanceTest {
 			System.out.println("From: " + trans.get(i).getFrom()); 
 			System.out.println(); 
 		}
+		*/
 	}
-
 }
