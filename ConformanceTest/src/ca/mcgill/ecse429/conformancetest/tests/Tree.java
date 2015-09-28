@@ -8,8 +8,8 @@ import ca.mcgill.ecse429.conformancetest.statemodel.StateMachine;
 import ca.mcgill.ecse429.conformancetest.statemodel.Transition;
 
 public class Tree {
-	List<Transition> transitions;
-	List<LinkedList<Transition>> paths;
+	private List<Transition> transitions;
+	private List<LinkedList<Transition>> paths;
 	
 	public Tree(StateMachine stateMachine){
 		List<State> states = stateMachine.getStates();
@@ -38,7 +38,7 @@ public class Tree {
 		
 	}
 	
-	public List breadthFirst(LinkedList<Transition> temp){
+	private List breadthFirst(LinkedList<Transition> temp){
 		Transition curTransition = temp.get(temp.size()-1);
 		
 		for(Transition tran : transitions){
@@ -60,7 +60,7 @@ public class Tree {
 		return temp;
 	}
 
-	public boolean checkExistence(LinkedList<Transition> list, Transition checked){
+	private boolean checkExistence(LinkedList<Transition> list, Transition checked){
 		// System.out.println("1: " + checked.getFrom().getName() + " " + checked.getTo().getName() + " " + checked.getEvent());
 
 		for (Transition tran : list){
@@ -73,5 +73,9 @@ public class Tree {
 		}
 		
 		return false;
+	}
+	
+	public List<LinkedList<Transition>> getPaths(){
+		return this.paths;
 	}
 }
