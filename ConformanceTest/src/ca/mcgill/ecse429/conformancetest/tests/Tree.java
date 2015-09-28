@@ -46,13 +46,14 @@ public class Tree {
 				// This one iterates through ALL of the transitions
 				//if (!temp.contains(tran)){
 					//temp.add(tran);
-				if (!checkExistence(temp, tran)){
-					LinkedList<Transition> newTemp = (LinkedList<Transition>) temp.clone();
+				LinkedList<Transition> newTemp = (LinkedList<Transition>) temp.clone();
+				if (!checkExistence(newTemp, tran)){
+					
 					newTemp.add(tran);
 					breadthFirst(newTemp);
 				}
 				else{
-					if(!paths.contains(temp)) paths.add(temp);
+					if(!paths.contains(newTemp)) paths.add(newTemp);
 				}
 			}
 		}
@@ -61,13 +62,18 @@ public class Tree {
 	}
 
 	private boolean checkExistence(LinkedList<Transition> list, Transition checked){
-		// System.out.println("1: " + checked.getFrom().getName() + " " + checked.getTo().getName() + " " + checked.getEvent());
-
-		for (Transition tran : list){
-			// System.out.println("2: " + tran.getFrom().getName() + " " + tran.getTo().getName() + " " + tran.getEvent());
+		for (Transition tran : list){			
+			if (tran.getFrom().equals(tran.getTo())){
+				return true;
+			}
 			
-			if (tran.getFrom().equals(checked.getTo())){
-				// System.out.println("3: " + tran.getFrom().getName() + " " + checked.getTo().getName());
+			if (checked.getFrom().equals(checked.getTo())){
+				list.add(checked);
+				return true;
+			}
+			
+			if (tran.getFrom().equals(checked.getTo()) && !tran.getFrom().equals(tran.getTo())){
+				list.add(checked);
 				return true;
 			}
 		}

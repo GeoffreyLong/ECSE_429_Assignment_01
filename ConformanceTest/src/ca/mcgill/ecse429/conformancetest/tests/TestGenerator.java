@@ -29,8 +29,9 @@ public class TestGenerator {
 		printFileHeader(mach);
 		printSetUpMethod(mach);
 		
-		/*
+		
 		List<LinkedList<Transition>> paths = getPaths(mach);
+		/*
 		int i = 1;
 		for(LinkedList<Transition> path : paths){
 			generateTest(path, i);
