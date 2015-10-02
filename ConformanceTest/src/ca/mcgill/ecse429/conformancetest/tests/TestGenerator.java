@@ -117,7 +117,7 @@ public class TestGenerator {
 					for (int j = 0; j < valueTokens.length; j++){
 						if (valueTokens[j].matches("[a-zA-Z]+") 
 								&& !(valueTokens[j].equals("true") || valueTokens[j].equals("false"))){
-							newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
+							newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1) + "()";
 						}
 						else{
 							newValue += valueTokens[j];
@@ -143,7 +143,7 @@ public class TestGenerator {
 				for (int j = 0; j < valueTokens.length; j++){
 					if (valueTokens[j].matches("[a-zA-Z]+") 
 							&& !(valueTokens[j].equals("true") || valueTokens[j].equals("false"))){
-						newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
+						newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1) + "()";
 					}
 					else{
 						newValue += valueTokens[j];
@@ -158,7 +158,7 @@ public class TestGenerator {
 				String parameter = "(" + /* no params?  + */ ");";
 				print(2,"classObj." + tran.getEvent() + parameter);			
 			}
-			print(2,"assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +");");
+			print(2,"assertEquals(classObj.getStateFullName(),\"" + tran.getTo().getName() +"\");");
 			
 			for (String var : vars){
 				print(2,"assertEquals(expected" + var + ", classObj.get" + var + "());");				
