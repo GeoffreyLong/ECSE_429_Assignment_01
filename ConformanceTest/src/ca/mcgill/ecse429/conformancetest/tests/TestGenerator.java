@@ -67,6 +67,8 @@ public class TestGenerator {
 		// Imports
 		print(0,"import " + mach.getPackageName() + ".*;");
 		print(0,"import org.junit.*;");
+		// The compilation doesn't like importing the full junit apparently?
+		print(0,"import static org.junit.Assert.*;");
 		print(0,"");
 		
 		// Name of testing class
@@ -148,12 +150,12 @@ public class TestGenerator {
 					}
 				}
 				
-				print(2,"assertTrue(" + newValue + ")");
+				print(2,"assertTrue(" + newValue + ");");
 			}
 			
 			if (!tran.getEvent().equals("@ctor")){
 				// "start" isn't a state
-				String parameter = "(" + /* no params?  + */ ")";
+				String parameter = "(" + /* no params?  + */ ");";
 				print(2,"classObj." + tran.getEvent() + parameter);			
 			}
 			print(2,"assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +");");
