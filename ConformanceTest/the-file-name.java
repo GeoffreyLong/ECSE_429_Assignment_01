@@ -32,7 +32,7 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedTotalQtrs = 0;
+		expectedTotalQtrs = 0;
 		classObj.reset()
 		assertEquals(classObj.getStateFullName(),empty);
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
@@ -47,11 +47,11 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = 0;
+		expectedCurQtrs = 0;
 		classObj.returnQtrs()
 		assertEquals(classObj.getStateFullName(),empty);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
@@ -66,12 +66,12 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedTotalQtrs = 0;
-		Object expectedCurQtrs = 0;
+		expectedTotalQtrs = 0;
+		expectedCurQtrs = 0;
 		classObj.reset()
 		assertEquals(classObj.getStateFullName(),empty);
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
@@ -87,18 +87,18 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
-		Object expectedAllowVend = true;
+		expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedAllowVend = true;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = 0;
-		Object expectedAllowVend = false;
+		expectedCurQtrs = 0;
+		expectedAllowVend = false;
 		classObj.returnQtrs()
 		assertEquals(classObj.getStateFullName(),empty);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
@@ -114,19 +114,19 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
-		Object expectedAllowVend = true;
+		expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedAllowVend = true;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedTotalQtrs = 0;
-		Object expectedCurQtrs = 0;
-		Object expectedAllowVend = false;
+		expectedTotalQtrs = 0;
+		expectedCurQtrs = 0;
+		expectedAllowVend = false;
 		classObj.reset()
 		assertEquals(classObj.getStateFullName(),empty);
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
@@ -143,17 +143,17 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
-		Object expectedAllowVend = true;
+		expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedAllowVend = true;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.add()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
@@ -168,19 +168,19 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
-		Object expectedAllowVend = true;
+		expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedAllowVend = true;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedTotalQtrs = classObj.getTotalQtrs+2;
-		Object expectedCurQtrs = 0;
-		Object expectedAllowVend = false;
+		expectedTotalQtrs = classObj.getTotalQtrs+2;
+		expectedCurQtrs = 0;
+		expectedAllowVend = false;
 		assertTrue(classObj.getCurQtrs==2)
 		classObj.vend()
 		assertEquals(classObj.getStateFullName(),empty);
@@ -198,19 +198,19 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
-		Object expectedAllowVend = true;
+		expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedAllowVend = true;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedTotalQtrs = classObj.getTotalQtrs+2;
-		Object expectedCurQtrs = 1;
-		Object expectedAllowVend = false;
+		expectedTotalQtrs = classObj.getTotalQtrs+2;
+		expectedCurQtrs = 1;
+		expectedAllowVend = false;
 		assertTrue(classObj.getCurQtrs==3)
 		classObj.vend()
 		assertEquals(classObj.getStateFullName(),notAllowed);
@@ -228,18 +228,18 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedCurQtrs = classObj.getCurQtrs+1;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),notAllowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		Object expectedCurQtrs = classObj.getCurQtrs+1;
-		Object expectedAllowVend = true;
+		expectedCurQtrs = classObj.getCurQtrs+1;
+		expectedAllowVend = true;
 		classObj.addQtr()
 		assertEquals(classObj.getStateFullName(),allowed);
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
-		Object expectedTotalQtrs = classObj.getTotalQtrs+2;
-		Object expectedCurQtrs = classObj.getCurQtrs-2;
+		expectedTotalQtrs = classObj.getTotalQtrs+2;
+		expectedCurQtrs = classObj.getCurQtrs-2;
 		assertTrue(classObj.getCurQtrs>3)
 		classObj.vend()
 		assertEquals(classObj.getStateFullName(),allowed);
