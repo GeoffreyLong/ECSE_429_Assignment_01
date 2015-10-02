@@ -122,7 +122,13 @@ public class TestGenerator {
 						}
 					}
 					
-					print(2,"Object expected" + vars.get(k) + " = " + newValue + ";");
+					if (declaredVars.contains(vars.get(k))){
+						print(2,"expected" + vars.get(k) + " = " + newValue + ";");						
+					}
+					else{
+						print(2,"Object expected" + vars.get(k) + " = " + newValue + ";");	
+						declaredVars.add(vars.get(k));
+					}
 					k++;
 				}
 				
