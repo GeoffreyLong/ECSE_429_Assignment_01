@@ -60,23 +60,38 @@ public class TestGenerator {
 		writer.close();
 	}
 	
+	private void printFileHeader(StateMachine mach) {
+		// Package name
+		print(0,"package " + mach.getPackageName() + ".test;");
+
+		// Imports
+		print(0,"import " + mach.getPackageName() + ";");
+		print(0,"import org.junit.*;");
+		print(0,"");
+		
+		// Name of testing class
+		print(0,"public class Test" + mach.getClassName().split("\\.")[0] + " {");
+	}
+	
 	private void printSetUpMethod(StateMachine mach) {
 		String className = mach.getClassName().split("\\.")[0];
-		writer.println("private " + className + " classObj;");
-		writer.println("@Before");
+		print(1,"private " + className + " classObj;");
+		print(1,"");
+		print(1,"@Before");
 		
-		writer.println("public void setUp() throws Exception {");
+		print(1,"public void setUp() throws Exception {");
 		
 		//TODO Perhaps will require parameter to constructor
-		writer.println("classObj = new " + className + "();");
+		print(2,"classObj = new " + className + "();");
 		
-		writer.println("}");
+		print(1,"}");
 	}
 
 	private void generateTest(LinkedList<Transition> path, int i) {
 		// Print method header
-		writer.println("@Test");
-		writer.println("public void testConformance_" + i + "() {");
+		print(1,"");
+		print(1,"@Test");
+		print(1,"public void testConformance_" + i + "() {");
 		
 		for (Transition tran : path){
 			// Could put in a setUp BeforeEach or whatever?
@@ -85,28 +100,16 @@ public class TestGenerator {
 			if (!tran.getEvent().equals("@ctor")){
 				// "start" isn't a state
 				String parameter = "(" + /* no params?  + */ ")";
-				writer.println("classObj." + tran.getEvent() + parameter);			
+				print(2,"classObj." + tran.getEvent() + parameter);			
 			}
-			writer.println("assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +")");
+			print(2,"assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +")");
 		}
 		
-		writer.println("}");
-	}
-
-	private void printFileHeader(StateMachine mach) {
-		// Package name
-		writer.println("package " + mach.getPackageName() + ".test;");
-
-		// Imports
-		writer.println("import " + mach.getPackageName() + ";");
-		writer.println("import org.junit.*;");
-		
-		// Name of testing class
-		writer.println("public class Test" + mach.getClassName().split("\\.")[0] + " {");
+		print(1,"}");
 	}
 	
 	private void printFileClose(){
-		writer.println("}");
+		print(0,"}");
 	}
 
 	private StateMachine getStateMachine(){
@@ -125,5 +128,14 @@ public class TestGenerator {
 	private List<LinkedList<Transition>> getPaths(StateMachine mach){
 		Tree tree = new Tree(mach);
 		return tree.getPaths();
+	}
+	
+	private void print(int tabLevel, String toPrint){
+		String printString = "";
+		for(int i = 0; i < tabLevel; i++){
+			printString += "\t";
+		}
+		printString += toPrint;
+		writer.println(printString);
 	}
 }
