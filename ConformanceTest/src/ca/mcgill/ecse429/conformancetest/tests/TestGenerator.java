@@ -31,13 +31,12 @@ public class TestGenerator {
 		
 		
 		List<LinkedList<Transition>> paths = getPaths(mach);
-		/*
 		int i = 1;
 		for(LinkedList<Transition> path : paths){
 			generateTest(path, i);
 			i ++;
 		}
-		*/
+
 		/*
 		System.out.println(mach.getPackageName());
 		System.out.println(mach.getClassName());
@@ -79,10 +78,16 @@ public class TestGenerator {
 		writer.println("@Test");
 		writer.println("public void testConformance_" + i + "() {");
 		
-		// Print class instantiation
-		
 		for (Transition tran : path){
+			// Could put in a setUp BeforeEach or whatever?
+			// These are the variables that may change as a result of actions i.e. curQtrs = curQtrs + 1
 			
+			if (!tran.getEvent().equals("@ctor")){
+				// "start" isn't a state
+				String parameter = "(" + /* no params?  + */ ")";
+				writer.println("classObj." + tran.getEvent() + parameter);			
+			}
+			writer.println("assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +")");
 		}
 		
 		writer.println("}");

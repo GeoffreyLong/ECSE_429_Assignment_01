@@ -31,7 +31,8 @@ public class Tree {
 
 		for(LinkedList<Transition> path : paths){
 			for (Transition tran : path){
-				System.out.println(tran.getFrom().getName() + " " + tran.getTo().getName() + " " + tran.getEvent());
+				System.out.println(tran.getFrom().getName() + " " + tran.getTo().getName());
+				System.out.println("   condition:" + tran.getCondition() + " action:" + tran.getAction() + " event:" + tran.getEvent());
 			}
 			System.out.println();
 		}
