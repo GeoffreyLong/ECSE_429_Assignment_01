@@ -92,17 +92,58 @@ public class TestGenerator {
 		print(1,"");
 		print(1,"@Test");
 		print(1,"public void testConformance_" + i + "() {");
-		
+
+		List<String> declaredVars = new LinkedList<String>();
 		for (Transition tran : path){
 			// Could put in a setUp BeforeEach or whatever?
 			// These are the variables that may change as a result of actions i.e. curQtrs = curQtrs + 1
+			String[] actions = tran.getAction().split(";");
+			
+			// Could use a hashmap for a dict 
+			List<String> vars = new LinkedList<String>();
+
+			int k = 0;
+			for (String action: actions){
+				action = action.trim();
+				if (action != ""){	
+					
+					String[] tokens = action.split("=");
+					vars.add(new String(tokens[0].substring(0, 1).toUpperCase() + tokens[0].substring(1)).trim());
+					
+					String newValue = "";
+					String[] valueTokens = tokens[1].split(" ");
+					for (int j = 0; j < valueTokens.length; j++){
+						if (valueTokens[j].matches("[a-zA-Z]+") 
+								&& (valueTokens[j].equals("True") || valueTokens[j].equals("False"))){
+							newValue += "classObj." + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
+						}
+						else{
+							newValue += valueTokens[j];
+						}
+					}
+					
+					print(2,"Object expected" + vars.get(k) + " = " + newValue + ";");
+					k++;
+				}
+				
+			}
+			
+			/*
+			if (tran.getCondition() != ""){
+				
+			}
+			*/
 			
 			if (!tran.getEvent().equals("@ctor")){
 				// "start" isn't a state
 				String parameter = "(" + /* no params?  + */ ")";
 				print(2,"classObj." + tran.getEvent() + parameter);			
 			}
-			print(2,"assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +")");
+			print(2,"assertEquals(classObj.getStateFullName()," + tran.getTo().getName() +");");
+			
+			for (String var : vars){
+				print(2,"assertEquals(expected" + var + ", classObj.get" + var + "());");				
+			}
 		}
 		
 		print(1,"}");
