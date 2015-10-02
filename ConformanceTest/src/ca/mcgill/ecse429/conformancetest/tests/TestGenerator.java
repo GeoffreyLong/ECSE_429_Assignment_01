@@ -114,8 +114,8 @@ public class TestGenerator {
 					String[] valueTokens = tokens[1].split(" ");
 					for (int j = 0; j < valueTokens.length; j++){
 						if (valueTokens[j].matches("[a-zA-Z]+") 
-								&& (valueTokens[j].equals("True") || valueTokens[j].equals("False"))){
-							newValue += "classObj." + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
+								&& !(valueTokens[j].equals("True") || valueTokens[j].equals("False"))){
+							newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
 						}
 						else{
 							newValue += valueTokens[j];
@@ -128,11 +128,22 @@ public class TestGenerator {
 				
 			}
 			
-			/*
+
 			if (tran.getCondition() != ""){
+				String newValue = "";
+				String[] valueTokens = tran.getCondition().split(" ");
+				for (int j = 0; j < valueTokens.length; j++){
+					if (valueTokens[j].matches("[a-zA-Z]+") 
+							&& !(valueTokens[j].equals("True") || valueTokens[j].equals("False"))){
+						newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
+					}
+					else{
+						newValue += valueTokens[j];
+					}
+				}
 				
+				print(2,"assertTrue(" + newValue + ")");
 			}
-			*/
 			
 			if (!tran.getEvent().equals("@ctor")){
 				// "start" isn't a state
