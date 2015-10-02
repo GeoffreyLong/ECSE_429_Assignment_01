@@ -114,7 +114,7 @@ public class TestGenerator {
 					String[] valueTokens = tokens[1].split(" ");
 					for (int j = 0; j < valueTokens.length; j++){
 						if (valueTokens[j].matches("[a-zA-Z]+") 
-								&& !(valueTokens[j].equals("True") || valueTokens[j].equals("False"))){
+								&& !(valueTokens[j].equals("true") || valueTokens[j].equals("false"))){
 							newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
 						}
 						else{
@@ -134,7 +134,7 @@ public class TestGenerator {
 				String[] valueTokens = tran.getCondition().split(" ");
 				for (int j = 0; j < valueTokens.length; j++){
 					if (valueTokens[j].matches("[a-zA-Z]+") 
-							&& !(valueTokens[j].equals("True") || valueTokens[j].equals("False"))){
+							&& !(valueTokens[j].equals("true") || valueTokens[j].equals("false"))){
 						newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1);
 					}
 					else{
