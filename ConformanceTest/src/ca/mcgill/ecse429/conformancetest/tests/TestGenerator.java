@@ -65,7 +65,7 @@ public class TestGenerator {
 		print(0,"package " + mach.getPackageName() + ".test;");
 
 		// Imports
-		print(0,"import " + mach.getPackageName() + ";");
+		print(0,"import " + mach.getPackageName() + ".*;");
 		print(0,"import org.junit.*;");
 		print(0,"");
 		
