@@ -1,5 +1,5 @@
 package ca.mcgill.ecse429.conformancetest.ccoinbox.test;
-import ca.mcgill.ecse429.conformancetest.ccoinbox;
+import ca.mcgill.ecse429.conformancetest.ccoinbox.*;
 import org.junit.*;
 
 public class TestCCoinBox {
