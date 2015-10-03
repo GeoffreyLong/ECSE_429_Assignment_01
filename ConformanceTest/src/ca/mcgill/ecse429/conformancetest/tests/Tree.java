@@ -64,6 +64,7 @@ public class Tree {
 
 	private boolean checkExistence(LinkedList<Transition> list, Transition checked){
 		for (Transition tran : list){			
+
 			if (tran.getFrom().equals(tran.getTo())){
 				return true;
 			}

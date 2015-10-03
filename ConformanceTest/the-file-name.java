@@ -155,7 +155,7 @@ public class TestCCoinBox {
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 		assertEquals(expectedAllowVend, classObj.getAllowVend());
 		expectedCurQtrs = classObj.getCurQtrs()+1;
-		classObj.add();
+		classObj.addQtr();
 		assertEquals(classObj.getStateFullName(),"allowed");
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 	}
