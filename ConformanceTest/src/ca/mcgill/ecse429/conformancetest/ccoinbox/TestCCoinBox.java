@@ -1,4 +1,4 @@
-package ca.mcgill.ecse429.conformancetest.tests;
+package ca.mcgill.ecse429.conformancetest.ccoinbox;
 import ca.mcgill.ecse429.conformancetest.ccoinbox.*;
 import org.junit.*;
 import static org.junit.Assert.*;

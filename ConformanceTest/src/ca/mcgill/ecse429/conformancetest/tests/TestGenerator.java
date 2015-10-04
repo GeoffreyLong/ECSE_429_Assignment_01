@@ -14,8 +14,8 @@ import ca.mcgill.ecse429.conformancetest.statemodel.persistence.PersistenceXStre
 public class TestGenerator {
 	PrintWriter writer;
 	
-	public TestGenerator() {
-		StateMachine mach = getStateMachine();
+	public TestGenerator(String xml) {
+		StateMachine mach = getStateMachine(xml);
 		
 		String className = "GeneratedTest" + mach.getClassName();
 		String filePath = System.getProperty("user.dir");
@@ -189,9 +189,9 @@ public class TestGenerator {
 		print(0,"}");
 	}
 
-	private StateMachine getStateMachine(){
+	private StateMachine getStateMachine(String xml){
 		PersistenceStateMachine stateMach = new PersistenceStateMachine(); 
-		stateMach.loadStateMachine("legislation.xml");
+		stateMach.loadStateMachine(xml);
 		
 		PersistenceXStream pers = new PersistenceXStream(); 
 		StateMachine mach = (StateMachine) pers.loadFromXMLwithXStream();

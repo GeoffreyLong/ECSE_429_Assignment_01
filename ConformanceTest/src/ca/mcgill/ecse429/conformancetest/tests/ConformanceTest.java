@@ -10,7 +10,11 @@ import ca.mcgill.ecse429.conformancetest.statemodel.persistence.PersistenceXStre
 public class ConformanceTest {
 
 	public static void main(String[] args) { 
-		//take xml as an argument, eventually
-		TestGenerator tester = new TestGenerator(/*Pass XML into Generator*/);
+		if (args.length != 1){
+			System.out.println("Please pass full path of XML file as argument");
+		}
+		else{
+			TestGenerator tester = new TestGenerator(args[0]);
+		}
 	}
 }
