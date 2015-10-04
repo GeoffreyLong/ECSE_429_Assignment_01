@@ -11,11 +11,12 @@ public class Tree {
 	private List<Transition> transitions;
 	private List<LinkedList<Transition>> paths;
 	private List<State> endStates = new LinkedList<State>();
+	private List<State> visited = new LinkedList<State>();
 	
 	public Tree(StateMachine stateMachine){
-		List<State> states = stateMachine.getStates();
 		transitions = stateMachine.getTransitions();
 		paths = new LinkedList<LinkedList<Transition>>();
+		
 			
 		endStates.addAll(stateMachine.getStates());
 		
@@ -56,18 +57,10 @@ public class Tree {
 	}
 
 	private boolean checkExistence(LinkedList<Transition> list, Transition checked){
+		visited.add(checked.getFrom());
 		for (Transition tran : list){		
 
-			if (tran.getFrom().equals(tran.getTo())){
-				return true;
-			}
-			
-			if (checked.getFrom().equals(checked.getTo())){
-				list.add(checked);
-				return true;
-			}
-			
-			if (tran.getFrom().equals(checked.getTo()) && !tran.getFrom().equals(tran.getTo())){
+			if (visited.contains(checked.getTo())){
 				list.add(checked);
 				return true;
 			}
@@ -77,7 +70,7 @@ public class Tree {
 				return true;
 			}
 		}
-				
+		visited.add(checked.getTo());	
 		return false;
 	}
 	
