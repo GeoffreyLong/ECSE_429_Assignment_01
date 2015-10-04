@@ -15,8 +15,16 @@ public class TestGenerator {
 	PrintWriter writer;
 	
 	public TestGenerator() {
+		StateMachine mach = getStateMachine();
+		
+		String className = "GeneratedTest" + mach.getClassName();
+		String filePath = System.getProperty("user.dir");
+		String packageName = mach.getPackageName().replaceAll("\\.", "/");
+		
+		System.out.println(filePath+ "/" + packageName + "/" + className);
+		
 		try {
-			writer = new PrintWriter("the-file-name.java", "UTF-8");
+			writer = new PrintWriter(filePath+ "/src/" + packageName + "/" + className, "UTF-8");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -24,9 +32,8 @@ public class TestGenerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		StateMachine mach = getStateMachine();
-		printFileHeader(mach);
+		
+		printFileHeader(mach, className);
 		printSetUpMethod(mach);
 		
 		
@@ -60,9 +67,9 @@ public class TestGenerator {
 		writer.close();
 	}
 	
-	private void printFileHeader(StateMachine mach) {
+	private void printFileHeader(StateMachine mach, String className) {
 		// Package name
-		print(0,"package " + mach.getPackageName() + ".test;");
+		print(0,"package " + mach.getPackageName() + ";");
 
 		// Imports
 		print(0,"import " + mach.getPackageName() + ".*;");
@@ -72,7 +79,7 @@ public class TestGenerator {
 		print(0,"");
 		
 		// Name of testing class
-		print(0,"public class Test" + mach.getClassName().split("\\.")[0] + " {");
+		print(0,"public class " + className.split("\\.")[0] + " {");
 	}
 	
 	private void printSetUpMethod(StateMachine mach) {
@@ -138,12 +145,22 @@ public class TestGenerator {
 			
 
 			if (tran.getCondition() != ""){
+				
 				String newValue = "";
 				String[] valueTokens = tran.getCondition().split(" ");
 				for (int j = 0; j < valueTokens.length; j++){
 					if (valueTokens[j].matches("[a-zA-Z]+") 
 							&& !(valueTokens[j].equals("true") || valueTokens[j].equals("false"))){
 						newValue += "classObj.get" + valueTokens[j].substring(0, 1).toUpperCase() + valueTokens[j].substring(1) + "()";
+					}
+					else if (valueTokens[j].contains("()")
+							&& !(valueTokens[j].equals("true") || valueTokens[j].equals("false"))){
+						if (valueTokens[j].substring(0, 1).equals("!")){
+							newValue += "!classObj." + valueTokens[j].substring(1);
+						}
+						else{
+							newValue += "classObj." + valueTokens[j];
+						}
 					}
 					else{
 						newValue += valueTokens[j];
@@ -174,7 +191,7 @@ public class TestGenerator {
 
 	private StateMachine getStateMachine(){
 		PersistenceStateMachine stateMach = new PersistenceStateMachine(); 
-		stateMach.loadStateMachine("ccoinbox.xml");
+		stateMach.loadStateMachine("legislation.xml");
 		
 		PersistenceXStream pers = new PersistenceXStream(); 
 		StateMachine mach = (StateMachine) pers.loadFromXMLwithXStream();

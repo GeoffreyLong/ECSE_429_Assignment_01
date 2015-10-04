@@ -10,6 +10,7 @@ import ca.mcgill.ecse429.conformancetest.statemodel.Transition;
 public class Tree {
 	private List<Transition> transitions;
 	private List<LinkedList<Transition>> paths;
+	private List<State> endStates = new LinkedList<State>();
 	
 	public Tree(StateMachine stateMachine){
 		List<State> states = stateMachine.getStates();
@@ -20,6 +21,14 @@ public class Tree {
 		// transitions.get(0).getTo();
 		// transitions.get(0).getFrom();
 		paths = new LinkedList<LinkedList<Transition>>();
+			
+		endStates.addAll(stateMachine.getStates());
+		
+		for (Transition tran : transitions){
+			if (endStates.contains(tran.getFrom())){
+				endStates.remove(tran.getFrom());
+			}
+		}
 		
 		for (Transition tran : transitions){
 			if (tran.getEvent().equals("@ctor")){
@@ -36,13 +45,13 @@ public class Tree {
 			}
 			System.out.println();
 		}
-		
 	}
 	
 	private List breadthFirst(LinkedList<Transition> temp){
 		Transition curTransition = temp.get(temp.size()-1);
 		
 		for(Transition tran : transitions){
+
 			if (curTransition.getTo().getName().equals(tran.getFrom().getName())){
 				// This one iterates through ALL of the transitions
 				//if (!temp.contains(tran)){
@@ -63,7 +72,7 @@ public class Tree {
 	}
 
 	private boolean checkExistence(LinkedList<Transition> list, Transition checked){
-		for (Transition tran : list){			
+		for (Transition tran : list){		
 
 			if (tran.getFrom().equals(tran.getTo())){
 				return true;
@@ -78,8 +87,13 @@ public class Tree {
 				list.add(checked);
 				return true;
 			}
+			
+			if (endStates.contains(checked.getTo())){
+				list.add(checked);
+				return true;
+			}
 		}
-		
+				
 		return false;
 	}
 	

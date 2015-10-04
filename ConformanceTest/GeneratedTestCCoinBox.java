@@ -3,7 +3,7 @@ import ca.mcgill.ecse429.conformancetest.ccoinbox.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-public class TestCCoinBox {
+public class GeneratedTestCCoinBox {
 	private CCoinBox classObj;
 	
 	@Before
