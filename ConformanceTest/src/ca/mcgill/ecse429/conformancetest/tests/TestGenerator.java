@@ -21,15 +21,11 @@ public class TestGenerator {
 		String filePath = System.getProperty("user.dir");
 		String packageName = mach.getPackageName().replaceAll("\\.", "/");
 		
-		System.out.println(filePath+ "/" + packageName + "/" + className);
-		
 		try {
 			writer = new PrintWriter(filePath+ "/src/" + packageName + "/" + className, "UTF-8");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -43,25 +39,6 @@ public class TestGenerator {
 			generateTest(path, i);
 			i ++;
 		}
-
-		/*
-		System.out.println(mach.getPackageName());
-		System.out.println(mach.getClassName());
-		System.out.println(mach.getClass());
-		*/
-		
-		/*
-		List<Transition> trans = mach.getTransitions();
-		
-		for (int i = 0; i < trans.size(); i++) {
-			System.out.println("Action: " + trans.get(i).getAction()); 
-			System.out.println("Condition: " + trans.get(i).getCondition()); 
-			System.out.println("Event: " + trans.get(i).getEvent()); 
-			System.out.println("To: " + trans.get(i).getTo()); 
-			System.out.println("From: " + trans.get(i).getFrom()); 
-			System.out.println(); 
-		}
-		*/
 		
 		printFileClose();
 		writer.close();
@@ -74,7 +51,6 @@ public class TestGenerator {
 		// Imports
 		print(0,"import " + mach.getPackageName() + ".*;");
 		print(0,"import org.junit.*;");
-		// The compilation doesn't like importing the full junit apparently?
 		print(0,"import static org.junit.Assert.*;");
 		print(0,"");
 		
@@ -196,10 +172,6 @@ public class TestGenerator {
 		PersistenceXStream pers = new PersistenceXStream(); 
 		StateMachine mach = (StateMachine) pers.loadFromXMLwithXStream();
 		return mach;		
-	}
-	
-	private void getMachineData(){
-		
 	}
 	
 	private List<LinkedList<Transition>> getPaths(StateMachine mach){

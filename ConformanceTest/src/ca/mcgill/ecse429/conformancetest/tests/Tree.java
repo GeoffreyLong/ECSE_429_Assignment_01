@@ -15,11 +15,6 @@ public class Tree {
 	public Tree(StateMachine stateMachine){
 		List<State> states = stateMachine.getStates();
 		transitions = stateMachine.getTransitions();
-		// State startState = stateMachine.getStartState();
-		
-		// states.get(0).getName();
-		// transitions.get(0).getTo();
-		// transitions.get(0).getFrom();
 		paths = new LinkedList<LinkedList<Transition>>();
 			
 		endStates.addAll(stateMachine.getStates());
@@ -32,18 +27,10 @@ public class Tree {
 		
 		for (Transition tran : transitions){
 			if (tran.getEvent().equals("@ctor")){
-				List temp = new LinkedList<Transition>();
+				List<Transition> temp = new LinkedList<Transition>();
 				temp.add(tran);
 				breadthFirst((LinkedList<Transition>) temp);				
 			}
-		}
-
-		for(LinkedList<Transition> path : paths){
-			for (Transition tran : path){
-				System.out.println(tran.getFrom().getName() + " " + tran.getTo().getName());
-				System.out.println("   condition:" + tran.getCondition() + " action:" + tran.getAction() + " event:" + tran.getEvent());
-			}
-			System.out.println();
 		}
 	}
 	
@@ -53,9 +40,6 @@ public class Tree {
 		for(Transition tran : transitions){
 
 			if (curTransition.getTo().getName().equals(tran.getFrom().getName())){
-				// This one iterates through ALL of the transitions
-				//if (!temp.contains(tran)){
-					//temp.add(tran);
 				LinkedList<Transition> newTemp = (LinkedList<Transition>) temp.clone();
 				if (!checkExistence(newTemp, tran)){
 					
