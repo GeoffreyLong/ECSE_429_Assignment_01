@@ -11,16 +11,12 @@ public class Tree {
 	private List<Transition> transitions;
 	private List<LinkedList<Transition>> paths;
 	private List<State> endStates = new LinkedList<State>();
+	private List<State> visited = new LinkedList<State>();
 	
 	public Tree(StateMachine stateMachine){
-		List<State> states = stateMachine.getStates();
 		transitions = stateMachine.getTransitions();
-		// State startState = stateMachine.getStartState();
-		
-		// states.get(0).getName();
-		// transitions.get(0).getTo();
-		// transitions.get(0).getFrom();
 		paths = new LinkedList<LinkedList<Transition>>();
+		
 			
 		endStates.addAll(stateMachine.getStates());
 		
@@ -32,18 +28,10 @@ public class Tree {
 		
 		for (Transition tran : transitions){
 			if (tran.getEvent().equals("@ctor")){
-				List temp = new LinkedList<Transition>();
+				List<Transition> temp = new LinkedList<Transition>();
 				temp.add(tran);
 				breadthFirst((LinkedList<Transition>) temp);				
 			}
-		}
-
-		for(LinkedList<Transition> path : paths){
-			for (Transition tran : path){
-				System.out.println(tran.getFrom().getName() + " " + tran.getTo().getName());
-				System.out.println("   condition:" + tran.getCondition() + " action:" + tran.getAction() + " event:" + tran.getEvent());
-			}
-			System.out.println();
 		}
 	}
 	
@@ -53,9 +41,6 @@ public class Tree {
 		for(Transition tran : transitions){
 
 			if (curTransition.getTo().getName().equals(tran.getFrom().getName())){
-				// This one iterates through ALL of the transitions
-				//if (!temp.contains(tran)){
-					//temp.add(tran);
 				LinkedList<Transition> newTemp = (LinkedList<Transition>) temp.clone();
 				if (!checkExistence(newTemp, tran)){
 					
@@ -72,18 +57,10 @@ public class Tree {
 	}
 
 	private boolean checkExistence(LinkedList<Transition> list, Transition checked){
+		visited.add(checked.getFrom());
 		for (Transition tran : list){		
 
-			if (tran.getFrom().equals(tran.getTo())){
-				return true;
-			}
-			
-			if (checked.getFrom().equals(checked.getTo())){
-				list.add(checked);
-				return true;
-			}
-			
-			if (tran.getFrom().equals(checked.getTo()) && !tran.getFrom().equals(tran.getTo())){
+			if (visited.contains(checked.getTo())){
 				list.add(checked);
 				return true;
 			}
@@ -93,7 +70,7 @@ public class Tree {
 				return true;
 			}
 		}
-				
+		visited.add(checked.getTo());	
 		return false;
 	}
 	
