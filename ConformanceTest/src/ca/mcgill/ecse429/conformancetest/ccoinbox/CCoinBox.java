@@ -210,7 +210,7 @@ public class CCoinBox
         }
         if (getCurQtrs()>3)
         {
-          curQtrs = 2;
+          curQtrs = curQtrs - 2;
           totalQtrs = totalQtrs + 2;
           setState(State.allowed);
           wasEventProcessed = true;

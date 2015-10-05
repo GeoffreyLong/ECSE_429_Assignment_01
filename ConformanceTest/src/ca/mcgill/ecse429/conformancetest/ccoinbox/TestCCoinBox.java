@@ -262,4 +262,38 @@ public class TestCCoinBox {
 		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
 		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 	}
+	
+	// This entire test was manually added using testConformance_10 to seed the values
+	@Test
+	public void testConformance_11() {
+		Object expectedTotalQtrs = 0;
+		Object expectedCurQtrs = 0;
+		Object expectedAllowVend = false;
+		assertEquals(classObj.getStateFullName(),"empty");
+		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
+		assertEquals(expectedAllowVend, classObj.getAllowVend());
+		expectedCurQtrs = classObj.getCurQtrs()+1;
+		classObj.addQtr();
+		assertEquals(classObj.getStateFullName(),"notAllowed");
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
+		expectedCurQtrs = classObj.getCurQtrs()+1;
+		expectedAllowVend = true;
+		classObj.addQtr();
+		assertEquals(classObj.getStateFullName(),"allowed");
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
+		assertEquals(expectedAllowVend, classObj.getAllowVend());
+
+		while(classObj.getCurQtrs() <= 4){	// Changed from test_10
+			classObj.addQtr();				
+		}				
+		
+		expectedTotalQtrs = classObj.getTotalQtrs()+2;
+		expectedCurQtrs = classObj.getCurQtrs()-2;
+		assertTrue(classObj.getCurQtrs()>3);
+		classObj.vend();
+		assertEquals(classObj.getStateFullName(),"allowed");
+		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
+	}
 }
