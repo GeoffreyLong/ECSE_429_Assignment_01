@@ -6,7 +6,8 @@ public class ConformanceTest {
 			System.out.println("Please pass full path of XML file as argument");
 		}
 		else{
-			TestGenerator tester = new TestGenerator(args[0]);
+			TestGenerator tester = new TestGenerator();
+			tester.run(args[0]);
 		}
 	}
 }

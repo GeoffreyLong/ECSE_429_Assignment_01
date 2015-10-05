@@ -14,13 +14,18 @@ import ca.mcgill.ecse429.conformancetest.statemodel.persistence.PersistenceXStre
 public class TestGenerator {
 	PrintWriter writer;
 	
-	public TestGenerator(String xml) {
+	public TestGenerator() {
+
+	}
+
+	public void run(String xml){
+		// Instantiate the state machine
 		StateMachine mach = getStateMachine(xml);
 		
+		// Create new java file to write to
 		String className = "GeneratedTest" + mach.getClassName();
 		String filePath = System.getProperty("user.dir");
 		String packageName = mach.getPackageName().replaceAll("\\.", "/");
-		
 		try {
 			writer = new PrintWriter(filePath+ "/src/" + packageName + "/" + className, "UTF-8");
 		} catch (FileNotFoundException e) {
@@ -32,7 +37,7 @@ public class TestGenerator {
 		printFileHeader(mach, className);
 		printSetUpMethod(mach);
 		
-		
+		// Generate a test for each path through the RTP tree
 		List<LinkedList<Transition>> paths = getPaths(mach);
 		int i = 1;
 		for(LinkedList<Transition> path : paths){
@@ -59,16 +64,15 @@ public class TestGenerator {
 	}
 	
 	private void printSetUpMethod(StateMachine mach) {
+		// Instantiate a class object of the tested class's type
 		String className = mach.getClassName().split("\\.")[0];
 		print(1,"private " + className + " classObj;");
 		print(1,"");
 		print(1,"@Before");
 		
+		// Populate the class object
 		print(1,"public void setUp() throws Exception {");
-		
-		//TODO Perhaps will require parameter to constructor
 		print(2,"classObj = new " + className + "();");
-		
 		print(1,"}");
 	}
 
@@ -80,13 +84,13 @@ public class TestGenerator {
 
 		List<String> declaredVars = new LinkedList<String>();
 		for (Transition tran : path){
-			// Could put in a setUp BeforeEach or whatever?
 			// These are the variables that may change as a result of actions i.e. curQtrs = curQtrs + 1
 			String[] actions = tran.getAction().split(";");
-			
-			// Could use a hashmap for a dict 
+
+			// These are the variables used in the tested class
 			List<String> vars = new LinkedList<String>();
 
+			// Save the vars and their expected values to be checked after the state change
 			int k = 0;
 			for (String action: actions){
 				action = action.trim();
@@ -107,6 +111,7 @@ public class TestGenerator {
 						}
 					}
 					
+					// Ensure there are no double declarations
 					if (declaredVars.contains(vars.get(k))){
 						print(2,"expected" + vars.get(k) + " = " + newValue + ";");						
 					}
@@ -116,12 +121,11 @@ public class TestGenerator {
 					}
 					k++;
 				}
-				
 			}
 			
 
+			// Generate the assertions for the conditions
 			if (tran.getCondition() != ""){
-				
 				String newValue = "";
 				String[] valueTokens = tran.getCondition().split(" ");
 				for (int j = 0; j < valueTokens.length; j++){
@@ -146,13 +150,17 @@ public class TestGenerator {
 				print(2,"assertTrue(" + newValue + ");");
 			}
 			
+			// Initiate the transition
+			// "start" isn't a state, don't use the transition
 			if (!tran.getEvent().equals("@ctor")){
-				// "start" isn't a state
 				String parameter = "(" + /* no params?  + */ ");";
 				print(2,"classObj." + tran.getEvent() + parameter);			
 			}
+			
+			// Check that the correct state was entered into
 			print(2,"assertEquals(classObj.getStateFullName(),\"" + tran.getTo().getName() +"\");");
 			
+			// Check that the vars have the correct value after the state change
 			for (String var : vars){
 				print(2,"assertEquals(expected" + var + ", classObj.get" + var + "());");				
 			}
@@ -179,6 +187,7 @@ public class TestGenerator {
 		return tree.getPaths();
 	}
 	
+	// A small method to make formatting the prints easier
 	private void print(int tabLevel, String toPrint){
 		String printString = "";
 		for(int i = 0; i < tabLevel; i++){
