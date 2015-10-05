@@ -185,16 +185,14 @@ public class TestCCoinBox {
 			classObj.addQtr();				// Manually Added
 		}									// Manually Added
 		
-		if (classObj.getCurQtrs()==2){		// Manually Added
-			expectedTotalQtrs = classObj.getTotalQtrs()+2;
-			expectedCurQtrs = 0;
-			expectedAllowVend = false;
-			assertTrue(classObj.getCurQtrs()==2);classObj.vend();
-			assertEquals(classObj.getStateFullName(),"empty");
-			assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
-			assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-			assertEquals(expectedAllowVend, classObj.getAllowVend());
-		}									// Manually Added
+		expectedTotalQtrs = classObj.getTotalQtrs()+2;
+		expectedCurQtrs = 0;
+		expectedAllowVend = false;
+		assertTrue(classObj.getCurQtrs()==2);classObj.vend();
+		assertEquals(classObj.getStateFullName(),"empty");
+		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
+		assertEquals(expectedAllowVend, classObj.getAllowVend());
 	}
 	
 	@Test
@@ -221,17 +219,15 @@ public class TestCCoinBox {
 			classObj.addQtr();				// Manually Added
 		}									// Manually Added
 
-		if (classObj.getCurQtrs()==3) {		// Manually Added
-			expectedTotalQtrs = classObj.getTotalQtrs()+2;
-			expectedCurQtrs = 1;
-			expectedAllowVend = false;
-			assertTrue(classObj.getCurQtrs()==3);
-			classObj.vend();
-			assertEquals(classObj.getStateFullName(),"notAllowed");
-			assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
-			assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-			assertEquals(expectedAllowVend, classObj.getAllowVend());
-		}									// Manually Added
+		expectedTotalQtrs = classObj.getTotalQtrs()+2;
+		expectedCurQtrs = 1;
+		expectedAllowVend = false;
+		assertTrue(classObj.getCurQtrs()==3);
+		classObj.vend();
+		assertEquals(classObj.getStateFullName(),"notAllowed");
+		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
+		assertEquals(expectedAllowVend, classObj.getAllowVend());
 	}
 	
 	@Test
@@ -258,14 +254,12 @@ public class TestCCoinBox {
 			classObj.addQtr();				// Manually Added
 		}									// Manually Added
 		
-		if (classObj.getCurQtrs() > 3) {	// Manually Added
-			expectedTotalQtrs = classObj.getTotalQtrs()+2;
-			expectedCurQtrs = classObj.getCurQtrs()-2;
-			assertTrue(classObj.getCurQtrs()>3);
-			classObj.vend();
-			assertEquals(classObj.getStateFullName(),"allowed");
-			assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
-			assertEquals(expectedCurQtrs, classObj.getCurQtrs());
-		}									// Manually Added
+		expectedTotalQtrs = classObj.getTotalQtrs()+2;
+		expectedCurQtrs = classObj.getCurQtrs()-2;
+		assertTrue(classObj.getCurQtrs()>3);
+		classObj.vend();
+		assertEquals(classObj.getStateFullName(),"allowed");
+		assertEquals(expectedTotalQtrs, classObj.getTotalQtrs());
+		assertEquals(expectedCurQtrs, classObj.getCurQtrs());
 	}
 }
