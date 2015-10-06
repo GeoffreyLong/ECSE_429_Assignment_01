@@ -11,6 +11,11 @@ public class GeneratedTestLegislation {
 		classObj = new Legislation();
 	}
 	
+	@After
+	public void tearDown() throws Exception {
+		classObj = null;
+	}
+	
 	@Test
 	public void testConformance_1() {
 		Object expectedIsCommonsBill = true;

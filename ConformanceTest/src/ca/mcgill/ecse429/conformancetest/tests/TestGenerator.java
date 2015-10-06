@@ -35,7 +35,7 @@ public class TestGenerator {
 		}
 		
 		printFileHeader(mach, className);
-		printSetUpMethod(mach);
+		printSetUpAndTearDownMethods(mach);
 		
 		// Generate a test for each path through the RTP tree
 		List<LinkedList<Transition>> paths = getPaths(mach);
@@ -63,7 +63,7 @@ public class TestGenerator {
 		print(0,"public class " + className.split("\\.")[0] + " {");
 	}
 	
-	private void printSetUpMethod(StateMachine mach) {
+	private void printSetUpAndTearDownMethods(StateMachine mach) {
 		// Instantiate a class object of the tested class's type
 		String className = mach.getClassName().split("\\.")[0];
 		print(1,"private " + className + " classObj;");
@@ -73,6 +73,13 @@ public class TestGenerator {
 		// Populate the class object
 		print(1,"public void setUp() throws Exception {");
 		print(2,"classObj = new " + className + "();");
+		print(1,"}");
+		
+		print(1,"");
+		print(1,"@After");
+		// Destroy the class Object
+		print(1,"public void tearDown() throws Exception {");
+		print(2,"classObj = null;");
 		print(1,"}");
 	}
 

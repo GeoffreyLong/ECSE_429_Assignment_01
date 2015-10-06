@@ -11,6 +11,11 @@ public class GeneratedTestCCoinBox {
 		classObj = new CCoinBox();
 	}
 	
+	@After
+	public void tearDown() throws Exception {
+		classObj = null;
+	}
+	
 	@Test
 	public void testConformance_1() {
 		Object expectedTotalQtrs = 0;
